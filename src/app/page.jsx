@@ -15,7 +15,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="py-16 px-4 md:px-8 lg:px-16 flex flex-col md:flex-row items-center justify-around  min-h-screen">
         <div className="md:w-1/2 mb-10 md:mb-0 w-3/4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6">
             Bringing AI-generated creativity to your screen.
           </h1>
           <p className="text-lg mb-8 text-gray-700">
