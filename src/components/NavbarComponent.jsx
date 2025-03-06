@@ -1,8 +1,76 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 
+import { Menu, X } from "lucide-react"
+
 const NavbarComponent = () => {
-  const isLoggedIn = false;
+  let isLoggedIn = false;
+  const [isCollapsed, setCollapsed] = useState(false);
+
+  const Nav_links = () => {
+    return (
+      <div className={`flex flex-col space-y-4 bg-indigo-600 w-full p-4 text-center transition-all`}>
+
+
+        {isLoggedIn ? (
+          <>
+            <div className="flex items-center justify-center space-x-4">
+              <div className="profile w-12 aspect-square rounded-full bg-white"></div> {/* Profile Picture Change to Image tag */}
+            </div>
+            <Link href="/" className="hover:text-indigo-200">
+              Home
+            </Link>
+            <Link href="#about" className="hover:text-indigo-200">
+              About Us
+            </Link>
+            <Link href="#pricing" className="hover:text-indigo-200">
+              Pricing
+            </Link>
+            <Link href="#" className="hover:text-indigo-200">
+              Feedback
+            </Link>
+            <Link
+              href="#"
+              className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium"
+            >
+              Dashboard
+            </Link>
+
+          </>
+
+        ) : (
+          <>
+            <Link href="/" className="hover:text-indigo-200">
+              Home
+            </Link>
+            <Link href="#about" className="hover:text-indigo-200">
+              About Us
+            </Link>
+            <Link href="#pricing" className="hover:text-indigo-200">
+              Pricing
+            </Link>
+            <Link href="#" className="hover:text-indigo-200">
+              Feedback
+            </Link>
+            <Link
+              href="#"
+              className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
+            >
+              Login
+            </Link>
+            <Link
+              href="#"
+              className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
+            >
+              Get Started
+            </Link>
+          </>
+        )}
+      </div>
+    );
+  };
 
   const BeforeLogin = () => {
     return (
@@ -25,22 +93,32 @@ const NavbarComponent = () => {
           </Link>
           <Link
             href="#"
-            className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium"
+            className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
           >
             Login
           </Link>
           <Link
             href="#"
-            className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium"
+            className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
           >
             Get Started
           </Link>
         </div>
         <div className="md:hidden">
           {/* Mobile menu button would go here */}
-          <button className="text-white">Menu</button>
+          <button
+            className="text-white p-2 hover:bg-indigo-700 rounded-md transition duration-100 ease-in"
+            onClick={() => setCollapsed(!isCollapsed)}
+          >
+            {isCollapsed ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          {isCollapsed && (
+            <div className="absolute left-0 top-16 w-full transform transition-transform duration-300 ease-in-out" >
+              <Nav_links />
+            </div>
+          )}
         </div>
-      </nav>
+      </nav >
     );
   };
 
@@ -77,7 +155,17 @@ const NavbarComponent = () => {
         </div>
         <div className="md:hidden">
           {/* Mobile menu button would go here */}
-          <button className="text-white">Menu</button>
+          <button
+            className="text-white p-2 hover:bg-indigo-700 rounded-md transition duration-100 ease-in"
+            onClick={() => setCollapsed(!isCollapsed)}
+          >
+            {isCollapsed ? <X size={24} /> : <Menu size={24} />}
+          </button>
+          {isCollapsed && (
+            <div className="absolute left-0 top-16 w-full transform transition-transform duration-300 ease-in-out" >
+              <Nav_links />
+            </div>
+          )}
         </div>
       </nav>
     );

@@ -20,7 +20,7 @@ export default function Home() {
           </h1>
           <p className="text-lg mb-8 text-gray-700">
             Instantly create high-quality content with the power of
-            AI—effortless, fast, and engaging.
+            AI-effortless, fast, and engaging.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button className="bg-indigo-600 hover:bg-indigo-700 text-white px-12 py-7 rounded-md">

@@ -88,7 +88,7 @@ const FooterComponent = () => {
           </div>
         </div>
 
-        <div className="flex justify-center space-x-6 mb-8">
+        <div className="flex justify-center md:space-x-6 mb-8 max-md:flex-col max-md:items-center max-md:space-y-4">
           <Link href="/" className="hover:text-indigo-400">
             Home
           </Link>
