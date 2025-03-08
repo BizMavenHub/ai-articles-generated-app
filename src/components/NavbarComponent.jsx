@@ -55,13 +55,13 @@ const NavbarComponent = () => {
               Feedback
             </Link>
             <Link
-              href="#"
+              href="sign-in"
               className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
             >
-              Login
+              Sign In
             </Link>
             <Link
-              href="#"
+              href="sign-up"
               className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
             >
               Get Started
@@ -92,13 +92,13 @@ const NavbarComponent = () => {
             Feedback
           </Link>
           <Link
-            href="#"
+            href="/sign-in"
             className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
           >
-            Login
+            Sign In
           </Link>
           <Link
-            href="#"
+            href="/sign-up"
             className="bg-white text-indigo-600 px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
           >
             Get Started

@@ -1,12 +1,25 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 // Import Components
 import NavbarComponent from "@/components/NavbarComponent";
 import FooterComponent from "@/components/FooterComponent";
 
+import { useRouter } from "next/navigation";
+import { useAuthContext } from '@/context/authenticationContext'
+
 export default function Home() {
+
+  const { session } = useAuthContext();
+
+  const router = useRouter();
+
+  if (session) {
+    router.push("/dashboard");
+  }
+
   return (
     <main className="min-h-screen">
       {/* Navigation */}
@@ -36,7 +49,7 @@ export default function Home() {
         </div>
         <div className="">
           <Image
-            src="./hero.svg"
+            src="/hero.svg"
             alt="Person creating content with AI"
             width={600}
             height={200}
@@ -52,7 +65,7 @@ export default function Home() {
       >
         <div className="">
           <Image
-            src="./about-us.svg"
+            src="/about-us.svg"
             alt="Team collaboration"
             width={800}
             height={400}

@@ -1,8 +1,7 @@
 import React from "react";
 import "./globals.css";
-import { Inter } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+import { AuthContextProvider } from "@/context/authenticationContext";
 
 export const metadata = {
   title: "AI Content Generator",
@@ -12,7 +11,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <AuthContextProvider>{children}</AuthContextProvider>
+      </body>
     </html>
   );
 }
