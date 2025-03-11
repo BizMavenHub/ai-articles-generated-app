@@ -2,13 +2,20 @@
 
 import React from 'react'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useAuthContext } from '@/context/authenticationContext'
 
 
 const page = () => {
+    const router = useRouter();
 
     const { session, signOut } = useAuthContext();
+
+    const handleSignOut = async () => {
+        await signOut()
+        router.push('/sign-in');
+    }
 
     if (!session) {
         return (
@@ -19,7 +26,7 @@ const page = () => {
     console.log(session);
 
     return (
-        <div><h1>Welcome to Dashboard</h1><button onClick={() => signOut()}>Logout</button></div>
+        <div><h1>Welcome to Dashboard</h1><button onClick={handleSignOut}>Logout</button></div>
 
     )
 }
