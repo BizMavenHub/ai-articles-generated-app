@@ -25,9 +25,6 @@ const SignUpForm = () => {
     const [warning, setWarning] = useState(null)
     const [loading, setLoading] = useState(false)
 
-    const started_subscription = new Date().toUTCString();
-    const expired_subscription = new Date(new Date().setMonth(new Date().getMonth() + 1)).toUTCString();
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 

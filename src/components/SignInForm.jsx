@@ -9,6 +9,8 @@ import Link from 'next/link'
 import { useAuthContext } from '@/context/authenticationContext'
 import { useRouter } from 'next/navigation'
 
+import supabase from '@/lib/supabaseClient'
+
 const SignInForm = () => {
 
     const router = useRouter()
@@ -56,6 +58,32 @@ const SignInForm = () => {
             console.error(error);
         } finally {
             setLoading(false);
+        }
+    }
+
+    const handleSignInWithOAuth = async (provider) => {
+        try {
+
+            setLoading(true)
+
+            const { data, error: loginError } = await supabase.auth.signInWithOAuth({
+                provider: provider
+            })
+
+            console.log(data.user)
+
+            if (loginError) {
+                setError(error.message)
+                return
+            }
+
+            setError(null)
+            setWarning(null)
+            setLoading(false)
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -159,6 +187,7 @@ const SignInForm = () => {
 
             <button
                 type="button"
+                onClick={() => handleSignInWithOAuth("github")}
                 className="w-full flex items-center justify-center bg-black text-white py-3 rounded-md hover:bg-gray-800 transition duration-300"
             >
                 <svg className="w-5 h-5 mr-2" fill="white" viewBox="0 0 24 24">
