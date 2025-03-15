@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useAuthContext } from '@/context/authenticationContext'
+import { useAuthContext } from '@/context/authenticationContext';
 
 
 const page = () => {
@@ -23,7 +23,7 @@ const page = () => {
         )
     }
 
-    console.log(session);
+    console.log(session.user);
 
     return (
         <div><h1>Welcome to Dashboard</h1><button onClick={handleSignOut}>Logout</button></div>

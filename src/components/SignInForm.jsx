@@ -132,6 +132,7 @@ const SignInForm = () => {
 
             <button
                 type="button"
+                onClick={() => handleSignInWithOAuth("google")}
                 className="w-full mb-3 flex items-center justify-center border border-gray-300 py-3 rounded-md hover:bg-gray-50 transition duration-300"
             >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -172,6 +173,12 @@ const SignInForm = () => {
                 </p>
                 <Link href={"/sign-up"} className="text-[#4942e4] font-medium hover:underline">
                     Create now!
+                </Link>
+            </div>
+
+            <div className='flex justify-center'>
+                <Link href="/" className="text-[#4942e4] my-3 font-medium hover:underline">
+                    Back
                 </Link>
             </div>
         </form>

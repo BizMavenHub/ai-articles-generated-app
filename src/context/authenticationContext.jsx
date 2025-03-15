@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
             options: {
                 data: {
                     username: username
+                    // avatar_url: "https://example.com/avatar.jpg"
                 }
             }
         })
