@@ -1,5 +1,7 @@
 "use client";
-import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+
+import { CheckCircle2, Sparkles } from "lucide-react";
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -9,17 +11,35 @@ import Link from "next/link";
 import NavbarComponent from "@/components/NavbarComponent";
 import FooterComponent from "@/components/FooterComponent";
 
+import supabase from "@/lib/supabaseClient";
+
 import { useRouter } from "next/navigation";
-import { useAuthContext } from "@/context/authenticationContext";
 
 export default function Home() {
-  const { session } = useAuthContext();
-
   const router = useRouter();
 
-  if (session) {
-    router.push("/dashboard");
-  }
+  useEffect(() => {
+    const checkSession = async () => {
+      const userSession = await supabase.auth.getSession();
+
+      console.log(userSession);
+
+      if (userSession.data.session) {
+        const { error } = await supabase
+          .from("login_with_email_users")
+          .update({ email_verified: true })
+          .eq("id", userSession.data.session.user.id);
+
+        if (error) {
+          console.log(error);
+        }
+
+        router.push("/dashboard");
+      }
+    };
+
+    checkSession();
+  }, [router]);
 
   return (
     <main className="min-h-screen">

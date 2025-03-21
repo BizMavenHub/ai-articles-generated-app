@@ -1,15 +1,35 @@
 "use client";
 
-import { useAuthContext } from "@/context/authenticationContext";
+import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
+import supabase from "@/lib/supabaseClient";
 
 export default function Page() {
-  const { session } = useAuthContext();
+  const [session, setSession] = useState(null);
 
   const router = useRouter();
 
+  useEffect(() => {
+    const checkSession = async () => {
+      const userSession = await supabase.auth.getSession();
+
+      setSession(userSession.data.session);
+
+      if (!userSession.data.session) {
+        router.push("/sign-in");
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
   if (!session) {
-    router.push("/sign-in");
+    return (
+      <div className="flex justify-center items-center">
+        <h1 className="text-3xl">Loading...</h1>
+      </div>
+    );
   }
 
   return (

@@ -75,7 +75,7 @@ const data = {
 };
 
 export default function AppSidebar({ ...props }) {
-  const { signOut } = useAuthContext();
+  const { session, signOut } = useAuthContext();
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -86,7 +86,7 @@ export default function AppSidebar({ ...props }) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} signOut={signOut} />
+        <NavUser user={session?.user?.user_metadata} signOut={signOut} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

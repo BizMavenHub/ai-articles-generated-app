@@ -16,11 +16,7 @@ export function NavMain({ items }) {
       <SidebarGroupLabel>Navigation</SidebarGroupLabel>
       <SidebarMenu>
         {items.navigation.map((item) => (
-          <SidebarMenuItem
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="cursor-pointer">
+          <SidebarMenuItem key={item.title} className="cursor-pointer">
             <SidebarMenuButton asChild>
               <a href={"/dashboard" + item.url}>
                 <item.icon />
@@ -34,11 +30,7 @@ export function NavMain({ items }) {
       <SidebarGroupLabel>Action</SidebarGroupLabel>
       <SidebarMenu>
         {items.action.map((item) => (
-          <SidebarMenuItem
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="cursor-pointer ">
+          <SidebarMenuItem key={item.title} className="cursor-pointer ">
             <SidebarMenuButton asChild>
               <a href={"/dashboard" + item.url}>
                 <item.icon />
