@@ -8,8 +8,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
-import { Separator } from "@/components/ui/separator";
-
 export function NavMain({ items }) {
   return (
     <SidebarGroup>

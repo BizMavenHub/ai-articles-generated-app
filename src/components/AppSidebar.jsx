@@ -1,7 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { Command, Settings2, SquareTerminal } from "lucide-react";
+import {
+  Command,
+  Settings2,
+  HomeIcon,
+  HistoryIcon,
+  CirclePlusIcon,
+  LineChartIcon,
+  TrendingUpIcon,
+} from "lucide-react";
 
 import { NavMain } from "@/components/sidebar_component/nav-main";
 import { NavUser } from "@/components/sidebar_component/nav-user";
@@ -35,25 +43,25 @@ const data = {
       {
         title: "Home",
         url: "",
-        icon: SquareTerminal,
+        icon: HomeIcon,
         isActive: true,
       },
       {
         title: "History",
         url: "/history",
-        icon: SquareTerminal,
+        icon: HistoryIcon,
         isActive: true,
       },
       {
         title: "SEO Checker",
         url: "/seo-checker",
-        icon: SquareTerminal,
+        icon: LineChartIcon,
         isActive: true,
       },
       {
         title: "Keywords Research",
         url: "#",
-        icon: SquareTerminal,
+        icon: TrendingUpIcon,
         isActive: true,
       },
       {
@@ -67,7 +75,7 @@ const data = {
       {
         title: "Create Article",
         url: "/create-article",
-        icon: SquareTerminal,
+        icon: CirclePlusIcon,
         isActive: false,
       },
     ],
