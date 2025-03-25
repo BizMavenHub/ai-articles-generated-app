@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 
+import supabase from "@/lib/supabaseClient";
+
+// Components
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Slider } from "./ui/slider";
@@ -31,9 +34,87 @@ const CreateArticleForm = () => {
     include_references: false,
   });
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const query = `Create an article on ${articleData.topic} with a ${
+    articleData.writingStyle
+  } tone and a ${articleData.tone} writing style. 
+    The target audience is ${
+      articleData.target_audience
+    }, and the article should be ${articleData.article_length} words long. 
+    Incorporate relevant keywords such as ${
+      articleData.keywords
+    } for better discoverability. 
+    The content structure should include an introduction that hooks the reader, followed by well-organized sections covering key points, supported by examples or case studies
+    if applicable, and a conclusion summarizing the key takeaways with a call to action. Additionally, ensure ${
+      articleData.additional_instructions
+    }. 
+    SEO optimization by including a meta description, keyword placement, and readability improvements.
+    Suggest appropriate ${
+      articleData.suggest_image_placements ? "image placements" : "no"
+    } to enhance engagement and ${
+    articleData.include_references ? "include references" : "no"
+  } include references to credible sources to support the content. 
+    ${
+      articleData.seo_optimization ? "Yes" : "No"
+    } include image placements where visuals would enhance engagement, and ${
+    articleData.seo_optimization ? "Yes" : "No"
+  } include references to credible sources to support the content.`;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(articleData);
+
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/generated-article-with-ai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt: query,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error);
+        console.log(data.error);
+        return;
+      }
+
+      const { error: insertError } = await supabase.from("articles").insert({
+        topic: articleData.topic,
+        writing_style: articleData.writingStyle,
+        tone: articleData.tone,
+        keywords: articleData.keywords,
+        target_audience: articleData.target_audience,
+        article_length: articleData.article_length,
+        content_structure: articleData.content_structure,
+        additional_instructions: articleData.additional_instructions,
+        seo_optimization: articleData.seo_optimization,
+        suggest_image_placements: articleData.suggest_image_placements,
+        include_references: articleData.include_references,
+        content: data.context,
+      });
+
+      if (insertError) {
+        setError(insertError.message);
+        console.log(insertError.message);
+        return;
+      }
+
+      setError(null);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,8 +135,7 @@ const CreateArticleForm = () => {
           <Select
             onValueChange={(e) =>
               setArticleData({ ...articleData, writingStyle: e })
-            }
-          >
+            }>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a writing style" />
             </SelectTrigger>
@@ -74,8 +154,7 @@ const CreateArticleForm = () => {
         <div className="flex flex-col space-y-2">
           <Label htmlFor="topic">Tones</Label>
           <Select
-            onValueChange={(e) => setArticleData({ ...articleData, tone: e })}
-          >
+            onValueChange={(e) => setArticleData({ ...articleData, tone: e })}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a tone" />
             </SelectTrigger>
@@ -110,8 +189,7 @@ const CreateArticleForm = () => {
         <Select
           onValueChange={(e) =>
             setArticleData({ ...articleData, target_audience: e })
-          }
-        >
+          }>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a target audience" />
           </SelectTrigger>
@@ -147,8 +225,7 @@ const CreateArticleForm = () => {
               ...articleData,
               content_structure: e,
             })
-          }
-        >
+          }>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a content structure" />
           </SelectTrigger>
