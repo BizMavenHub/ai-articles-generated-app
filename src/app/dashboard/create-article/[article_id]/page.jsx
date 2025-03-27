@@ -33,7 +33,13 @@ const page = () => {
 
   return (
     <div className="container">
-      {article ? <ReactMarkdown>{article}</ReactMarkdown> : <p>Loading...</p>}
+      {article ? (
+        <ReactMarkdown>{article}</ReactMarkdown>
+      ) : (
+        <div className="flex justify-center items-center">
+          <h1 className="text-3xl">Loading...</h1>
+        </div>
+      )}
     </div>
   );
 };
