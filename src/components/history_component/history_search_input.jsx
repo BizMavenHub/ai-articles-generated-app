@@ -13,7 +13,7 @@ export default function HistorySearchInput() {
   return (
     <HistoryContext.Provider value={searchInput} className="space-y-5">
       <Input
-        placeholder="Search by title"
+        placeholder="Search by Id, Title, Content, or Date"
         className="w-full"
         onChange={(e) => setSearchInput(e.target.value)}
       />

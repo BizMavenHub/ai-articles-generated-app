@@ -26,43 +26,12 @@ import {
 
 import { Button } from "@/components/ui/button";
 
-const data = [
-  {
-    id: 1,
-    title: "This is the title of the article",
-    content: "This is the content of the article",
-    date: "2023-01-01",
-    wordsCount: 100,
-  },
-  {
-    id: 2,
-    title: "This is the title of the article",
-    content: "This is the content of the article",
-    date: "2023-01-01",
-    wordsCount: 110,
-  },
-  {
-    id: 3,
-    title: "This is the title of the article",
-    content: "This is the content of the article",
-    date: "2023-01-01",
-    wordsCount: 100,
-  },
-  {
-    id: 4,
-    title: "This is the title of the article",
-    content: "This is the content of the article",
-    date: "2023-01-01",
-    wordsCount: 100,
-  },
-];
-
 const HistoryTable = () => {
   const searchInput = useHistoryContext();
 
   const [articles, setArticles] = useState([]);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -90,6 +59,8 @@ const HistoryTable = () => {
     fetchArticles();
   }, []);
 
+  console.log(articles);
+
   const handleDeleteArticle = async (id) => {
     try {
       const { error } = await supabase.from("articles").delete().eq("id", id);
@@ -111,82 +82,98 @@ const HistoryTable = () => {
     (item) =>
       item.topic.toLowerCase().includes(searchInput.toLowerCase()) ||
       item.content.toLowerCase().includes(searchInput.toLowerCase()) ||
-      item.date.toLowerCase().includes(searchInput.toLowerCase()) ||
+      new Date(item.created_at).toLocaleDateString().includes(searchInput) ||
       item.id.toString().includes(searchInput) ||
-      item.wordsCount.toString().includes(searchInput)
+      item.article_length.toString().includes(searchInput)
   );
 
   return (
     <>
-      {loading || filteredArticles.length === 0 ? (
+      {loading ? (
         <div className="flex justify-center items-center">
           <h1 className="text-3xl">Loading...</h1>
         </div>
       ) : (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="">ID</TableHead>
-              <TableHead className="">Title</TableHead>
-              <TableHead className="">Content</TableHead>
-              <TableHead className="">Date</TableHead>
-              <TableHead className="">Words Count</TableHead>
-              <TableHead className="text-center"></TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredArticles.map((article) => (
-              <TableRow key={article.id}>
-                <TableCell className="font-medium">
-                  <Link
-                    className="hover:text-indigo-600 underline-offset-2 hover:underline"
-                    href={"create-article/" + article.id}>
-                    {article.id}
-                  </Link>
-                </TableCell>
-                <TableCell>{article.topic}</TableCell>
-                <TableCell className="whitespace-pre-line line-clamp-4">
-                  {article.content}
-                </TableCell>
-                <TableCell>
-                  {new Date(article.created_at).toLocaleDateString()}
-                </TableCell>
-                <TableCell className="text-center">
-                  {article.article_length}
-                </TableCell>
-                <TableCell className="text-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost">...</Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-fit p-4 flex flex-col space-y-2">
-                      <Button
-                        variant="default"
-                        className="w-[5vw] bg-indigo-600 hover:bg-indigo-700 text-white">
-                        Edit
-                      </Button>
-                      <Button
-                        variant="default"
-                        className="w-[5vw] bg-green-600
+        <>
+          {filteredArticles.length === 0 ? (
+            <div className="flex justify-center items-center">
+              <h1 className="text-3xl">No article found</h1>
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="">ID</TableHead>
+                  <TableHead className="">Title</TableHead>
+                  <TableHead>Content</TableHead>
+                  <TableHead className="">Date</TableHead>
+                  <TableHead className="">Words Count</TableHead>
+                  <TableHead className="text-center"></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredArticles.map((article) => (
+                  <TableRow key={article.id}>
+                    <TableCell className="font-medium">
+                      <Link
+                        className="hover:text-indigo-600 underline-offset-2 hover:underline"
+                        href={"create-article/" + article.id}>
+                        {article.id}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{article.topic}</TableCell>
+                    <TableCell className="whitespace-pre-line w-[500px] line-clamp-4">
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: article.content
+                            .replace(/```/g, "")
+                            .replace("html", "")
+                            .replace(/<[^>]+>/g, "")
+                            .trim(),
+                        }}></div>
+                    </TableCell>
+                    <TableCell>
+                      {new Date(article.created_at).toLocaleDateString()}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {article.article_length}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost">...</Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-fit p-4 flex flex-col space-y-2">
+                          <Button
+                            variant="default"
+                            className="w-[5vw] bg-indigo-600 hover:bg-indigo-700 text-white">
+                            Edit
+                          </Button>
+                          <Button
+                            variant="default"
+                            className="w-[5vw] bg-green-600
                     hover:bg-green-700 text-white"
-                        asChild>
-                        <Link href={`/dashboard/create-article/${article.id}`}>
-                          View
-                        </Link>
-                      </Button>
-                      <Button
-                        variant="default"
-                        className="w-[5vw] bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => handleDeleteArticle(article.id)}>
-                        Delete
-                      </Button>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+                            asChild>
+                            <Link
+                              href={`/dashboard/create-article/${article.id}`}>
+                              View
+                            </Link>
+                          </Button>
+                          <Button
+                            variant="default"
+                            className="w-[5vw] bg-red-600 hover:bg-red-700 text-white"
+                            onClick={() => handleDeleteArticle(article.id)}>
+                            Delete
+                          </Button>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </>
       )}
     </>
   );
