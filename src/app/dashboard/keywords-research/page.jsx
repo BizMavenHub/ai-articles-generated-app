@@ -4,12 +4,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 
-import { relatedKeywordsData, keywordData } from "@/app/utils/data";
-
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,

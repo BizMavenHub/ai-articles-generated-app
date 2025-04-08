@@ -9,25 +9,9 @@ import supabase from "@/lib/supabaseClient";
 import { Edit, Trash2 } from "lucide-react";
 
 // Components
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableHeader,
-} from "@/components/ui/table";
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import HistorySearchInput from "@/components/history_component/history_search_input";
+import Link from "next/link";
 
 export default function Page() {
   const [session, setSession] = useState(null);
@@ -93,7 +77,12 @@ export default function Page() {
           <section className="h-[60vh] flex flex-col space-y-6 rounded-xl bg-muted/50 p-6">
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold">Articles</h2>
-              <Button>New Article</Button>
+              <Link
+                href="/dashboard/create-article"
+                className="bg-indigo-600 h-fit text-white px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
+              >
+                New Article
+              </Link>
             </div>
 
             <div>
