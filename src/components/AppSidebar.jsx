@@ -60,7 +60,7 @@ const data = {
       },
       {
         title: "Keywords Research",
-        url: "#",
+        url: "/keywords-research",
         icon: TrendingUpIcon,
         isActive: true,
       },
