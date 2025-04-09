@@ -17,10 +17,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -58,8 +54,6 @@ const HistoryTable = () => {
 
     fetchArticles();
   }, []);
-
-  console.log(articles);
 
   const handleDeleteArticle = async (id) => {
     try {
