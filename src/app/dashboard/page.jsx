@@ -56,7 +56,7 @@ export default function Page() {
         );
 
       if (error) {
-        console.error(error);
+        console.log(error);
       }
 
       setTotalArticleThisMonth(data.length);
@@ -68,8 +68,10 @@ export default function Page() {
         .select("article_length");
 
       if (error) {
-        console.error(error);
+        console.log(error);
       }
+
+      console.log(data);
 
       setTotalWords(data.reduce((acc, item) => acc + item.article_length, 0));
     };
@@ -88,7 +90,7 @@ export default function Page() {
         );
 
       if (error) {
-        console.error(error);
+        console.log(error);
       }
 
       setTotalArticleLastMonth(data.length);
@@ -108,7 +110,7 @@ export default function Page() {
         );
 
       if (error) {
-        console.error(error);
+        console.log(error);
       }
 
       setTotalWordsLastMonth(
