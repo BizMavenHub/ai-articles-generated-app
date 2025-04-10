@@ -921,3 +921,138 @@ export const keywordData = [
     volume: 0,
   },
 ];
+
+export const testingArticle = `
+
+<h1>Generated Article</h1>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<h2>This is heading</h2>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<h2>This is heading</h2>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<h2>This is heading</h2>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<pre>
+  <code>
+    function GetArticle() {
+        return (
+          <div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Mollitia hic, deserunt dolor
+              qui asperiores delectus eum reprehenderit
+              temporibus magni illum? Culpa assumenda quidem
+              earum exercitationem quam perspiciatis sed tempora
+              numquam!
+            </p>
+          </div>
+        );
+      }
+  </code>
+</pre>    
+
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Mollitia hic, deserunt dolor qui asperiores delectus eum
+  reprehenderit temporibus magni illum? Culpa assumenda quidem
+  earum exercitationem quam perspiciatis sed tempora numquam!
+</p>
+
+<ul>
+  <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+    <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+    <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+    <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+  <li>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  </li>
+</ul>
+
+`;

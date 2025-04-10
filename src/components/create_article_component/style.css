@@ -1,25 +1,34 @@
-article {
-  font-family: "Times New Roman", Times, serif;
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Oswald:wght@200..700&display=swap&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&display=swap&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+.article h1,
+.article h2 {
+  font-family: "Montserrat", serif;
+}
+
+.article:not(.article h1, .article h2) {
+  /* font-family: "Merriweather", serif; */
+  font-family: "Roboto", sans-serif;
+  line-height: 1.8;
+  letter-spacing: 1px;
+  color: black;
+  font-size: 1.2em;
 }
 
 .article h1 {
   font-size: 3em;
   margin: 0;
   padding: 15px 0 15px;
-  font-family: "Times New Roman", Times, serif;
   font-weight: 800;
 }
 
 .article h2 {
   font-size: 1.8em;
-  margin: 10px 0 10px 0;
+  margin-top: 1.5rem;
   padding: 0;
-  font-family: "Times New Roman", Times, serif;
   font-weight: 700;
 }
 
 .article p {
-  font-size: 1em;
   margin: 0;
   padding: 5px 0 5px 0;
 }

@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 // Objects
 import ArticleObject from "@/lib/ArticleClass";
 
+import { testingArticle } from "@/app/utils/data";
+
 const ContentDisplayer = (props) => {
   const { generatedArticle, articleData } = props;
 
@@ -47,7 +49,7 @@ const ContentDisplayer = (props) => {
         .replace(/`([^`]*)`/g, "$1");
     };
 
-    getCleanArticle();
+    // getCleanArticle();
   }, [generatedArticle]);
 
   useEffect(() => {
@@ -127,12 +129,17 @@ const ContentDisplayer = (props) => {
                   <Button
                     onClick={() => handleSubmitArticleToDB()}
                     size={"xl"}
-                    className="bg-indigo-600 hover:bg-indigo-700">
+                    className="bg-indigo-600 hover:bg-indigo-700"
+                  >
                     Publish
                   </Button>
                 </div>
               </div>
-            ) : null}
+            ) : (
+              <div className="flex justify-center items-center h-full w-full">
+                <p className="text-gray-500">No article generated yet</p>
+              </div>
+            )}
           </>
         )}
       </div>
