@@ -26,6 +26,8 @@ const page = () => {
     try {
       e.preventDefault(); // Prevent the default form submission behavior
 
+      setLoading(true);
+
       if (!keywordInput) {
         setError(new Error("Please enter a keyword."));
         return;
@@ -43,11 +45,14 @@ const page = () => {
         },
       };
 
-      setLoading(true);
       const res = await fetch(url, options);
 
       if (res.status === 429) {
-        setError(new Error(`Rate limit exceeded. Please try again later.`));
+        setError(
+          new Error(
+            `Allow to search only 20 times per day. Please wait until tomorrow `
+          )
+        );
         return;
       }
 
@@ -85,22 +90,24 @@ const page = () => {
       </div>
 
       {error ? (
-        <div className="text-red-500">Error: {error.message}</div>
+        <div className="text-red-500">{error.message}</div>
       ) : (
         <section className="flex flex-col space-y-4">
           <div className="display-keyword-research">
-            {keyword.length > 0 ? (
+            {loading ? (
+              <p className="text-gray-500 text-center mt-8">Loading...</p>
+            ) : (
               <>
-                <h2 className="text-lg font-semibold ">
-                  Searching for:{" "}
-                  <span className="text-gray-500">{keyword.keyword}</span>
-                </h2>
+                {keyword.length > 0 ? (
+                  <div className="searching-keyword overflow-x-auto">
+                    <h2 className="text-lg font-semibold ">
+                      Searching for:{" "}
+                      <span className="text-gray-500">
+                        {keyword[0].keyword}
+                      </span>
+                    </h2>
 
-                <div className="searching-keyword overflow-x-auto">
-                  {loading ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <Table className="w-full">
+                    <Table className="w-full mt-4">
                       <TableHeader>
                         <TableRow>
                           <TableHead>Keyword</TableHead>
@@ -137,11 +144,11 @@ const page = () => {
                         ))}
                       </TableBody>
                     </Table>
-                  )}
-                </div>
+                  </div>
+                ) : (
+                  <p className="text-gray-500">Enter a keyword to search.</p>
+                )}
               </>
-            ) : (
-              <p className="text-gray-500">Enter a keyword to search.</p>
             )}
           </div>
         </section>
