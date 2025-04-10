@@ -41,7 +41,13 @@ const page = () => {
     };
 
     const removeMarkdownFromArticle = (article) => {
-      return article.replace(/```/g, "").replace("html", "");
+      return article
+        .replace(/```/g, "")
+        .replace("html", "")
+        .replace(/`([^`]*)`/g, "$1")
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // replace ** with bold
+        .replace(/\*\s*(.*?)\s*\*/g, "$1") // replace * with italics
+        .replace(/\*\s*(.*?)\s*\*/g, "$1"); // replace * with italics
     };
 
     fetchArticleById();
@@ -60,7 +66,7 @@ const page = () => {
   }, [article]);
 
   return (
-    <div className="container px-8 pb-12">
+    <div className="p-12">
       {loading ? (
         <div className="flex justify-center items-center">
           <h1 className="text-3xl">Loading...</h1>
@@ -70,7 +76,8 @@ const page = () => {
           {article ? (
             <div
               dangerouslySetInnerHTML={{ __html: article }}
-              className="article"></div>
+              className="article w-[90%] mx-auto"
+            ></div>
           ) : (
             <div className="flex justify-center items-center">
               <h1 className="text-3xl">No article found</h1>
