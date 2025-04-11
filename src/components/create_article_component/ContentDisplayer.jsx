@@ -49,7 +49,7 @@ const ContentDisplayer = (props) => {
         .replace(/`([^`]*)`/g, "$1");
     };
 
-    // getCleanArticle();
+    getCleanArticle();
   }, [generatedArticle]);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ const ContentDisplayer = (props) => {
         return;
       }
 
-      router.push(`/dashboard/create-article/${articleId.id}`);
+      router.push(`/article/${articleId.id}`);
     } catch (error) {
       console.log(error);
     }
@@ -129,8 +129,7 @@ const ContentDisplayer = (props) => {
                   <Button
                     onClick={() => handleSubmitArticleToDB()}
                     size={"xl"}
-                    className="bg-indigo-600 hover:bg-indigo-700"
-                  >
+                    className="bg-indigo-600 hover:bg-indigo-700">
                     Publish
                   </Button>
                 </div>

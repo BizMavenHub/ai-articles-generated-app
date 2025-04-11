@@ -107,16 +107,14 @@ const HistoryTable = () => {
               </TableHeader>
               <TableBody>
                 {filteredArticles.map((article) => (
-                  <TableRow key={article.id}>
-                    <TableCell className="font-medium">
-                      <Link
-                        className="hover:text-indigo-600 underline-offset-2 hover:underline"
-                        href={"create-article/" + article.id}
-                      >
-                        {article.id}
-                      </Link>
-                    </TableCell>
-                    <TableCell className="w-[400px]">{article.topic}</TableCell>
+                  <TableRow
+                    key={article.id}
+                    className="hover:bg-gray-100 transition ease-in-out duration-300 scroll-x-hidden cursor-pointer"
+                    onClick={() =>
+                      (window.location.href = `/dashboard/article/${article.id}`)
+                    }>
+                    <TableCell className="font-medium">{article.id}</TableCell>
+                    <TableCell className="w-[20vw]">{article.topic}</TableCell>
                     <TableCell className="whitespace-pre-line w-fit line-clamp-4">
                       <div
                         dangerouslySetInnerHTML={{
@@ -125,8 +123,7 @@ const HistoryTable = () => {
                             .replace("html", "")
                             .replace(/<[^>]+>/g, "")
                             .trim(),
-                        }}
-                      ></div>
+                        }}></div>
                     </TableCell>
                     <TableCell>
                       {new Date(article.created_at).toLocaleDateString()}
@@ -142,27 +139,23 @@ const HistoryTable = () => {
                         <DropdownMenuContent className="w-fit p-4 flex flex-col space-y-2">
                           <Button
                             variant="default"
-                            className="w-[5vw] bg-indigo-600 hover:bg-indigo-700 text-white"
-                          >
+                            className="w-[5vw] bg-indigo-600 hover:bg-indigo-700 text-white">
                             Edit
                           </Button>
                           <Button
                             variant="default"
                             className="w-[5vw] bg-green-600
-                    hover:bg-green-700 text-white"
-                            asChild
-                          >
+                hover:bg-green-700 text-white"
+                            asChild>
                             <Link
-                              href={`/dashboard/create-article/${article.id}`}
-                            >
+                              href={`/dashboard/create-article/${article.id}`}>
                               View
                             </Link>
                           </Button>
                           <Button
                             variant="default"
                             className="w-[5vw] bg-red-600 hover:bg-red-700 text-white"
-                            onClick={() => handleDeleteArticle(article.id)}
-                          >
+                            onClick={() => handleDeleteArticle(article.id)}>
                             Delete
                           </Button>
                         </DropdownMenuContent>

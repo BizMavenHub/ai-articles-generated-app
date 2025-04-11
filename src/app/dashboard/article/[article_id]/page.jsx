@@ -1,9 +1,9 @@
 "use client";
 
-import ArticleStyle from "./style.css";
 import hljs from "highlight.js";
 import supabase from "@/lib/supabaseClient";
 
+import "./style.css";
 import "highlight.js/styles/atom-one-dark.css";
 
 import { useParams } from "next/navigation";
@@ -66,7 +66,7 @@ const page = () => {
   }, [article]);
 
   return (
-    <div className="p-12">
+    <div className="pb-12">
       {loading ? (
         <div className="flex justify-center items-center">
           <h1 className="text-3xl">Loading...</h1>
@@ -76,8 +76,7 @@ const page = () => {
           {article ? (
             <div
               dangerouslySetInnerHTML={{ __html: article }}
-              className="article w-[90%] mx-auto"
-            ></div>
+              className="article w-[90%] mx-auto"></div>
           ) : (
             <div className="flex justify-center items-center">
               <h1 className="text-3xl">No article found</h1>
