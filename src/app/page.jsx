@@ -20,21 +20,23 @@ export default function Home() {
 
   useEffect(() => {
     const checkSession = async () => {
-      const userSession = await supabase.auth.getSession();
+      try {
+        const userSession = await supabase.auth.getSession();
 
-      console.log(userSession);
+        if (userSession?.data?.session) {
+          const { error } = await supabase
+            .from("login_with_email_users")
+            .update({ email_verified: true })
+            .eq("id", userSession.data.session.user.id);
 
-      if (userSession.data.session) {
-        const { error } = await supabase
-          .from("login_with_email_users")
-          .update({ email_verified: true })
-          .eq("id", userSession.data.session.user.id);
-
-        if (error) {
-          console.log(error);
+          if (error) {
+            console.error("Error updating email verification:", error);
+          } else {
+            router.push("/dashboard");
+          }
         }
-
-        router.push("/dashboard");
+      } catch (err) {
+        console.error("Error fetching session:", err);
       }
     };
 
