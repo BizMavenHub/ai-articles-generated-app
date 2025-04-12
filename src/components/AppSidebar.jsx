@@ -53,22 +53,10 @@ const data = {
         isActive: true,
       },
       {
-        title: "SEO Checker",
-        url: "/seo-checker",
-        icon: LineChartIcon,
-        isActive: true,
-      },
-      {
         title: "Keywords Research",
         url: "/keywords-research",
         icon: TrendingUpIcon,
         isActive: true,
-      },
-      {
-        title: "Settings",
-        url: "#",
-        icon: Settings2,
-        isActive: false,
       },
     ],
     action: [

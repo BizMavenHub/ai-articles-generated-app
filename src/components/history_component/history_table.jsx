@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
 import { useHistoryContext } from "@/context/historyContext";
 import supabase from "@/lib/supabaseClient";
@@ -98,7 +97,7 @@ const HistoryTable = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="">ID</TableHead>
-                  <TableHead className="">Title</TableHead>
+                  <TableHead className="w-[15vw]">Title</TableHead>
                   <TableHead>Content</TableHead>
                   <TableHead className="">Date</TableHead>
                   <TableHead className="">Words Count</TableHead>
@@ -107,15 +106,16 @@ const HistoryTable = () => {
               </TableHeader>
               <TableBody>
                 {filteredArticles.map((article) => (
-                  <TableRow
-                    key={article.id}
-                    className="hover:bg-gray-100 transition ease-in-out duration-300 scroll-x-hidden cursor-pointer"
-                    onClick={() =>
-                      (window.location.href = `/dashboard/article/${article.id}`)
-                    }>
+                  <TableRow key={article.id}>
                     <TableCell className="font-medium">{article.id}</TableCell>
-                    <TableCell className="w-[20vw]">{article.topic}</TableCell>
-                    <TableCell className="whitespace-pre-line w-fit line-clamp-4">
+                    <TableCell
+                      className="w-[20vw] underline cursor-pointer underline-offset-2 font-bold text-indigo-500"
+                      onClick={() =>
+                        (window.location.href = `/dashboard/article/${article.id}`)
+                      }>
+                      {article.topic}
+                    </TableCell>
+                    <TableCell className="whitespace-pre-line w-[40vw] line-clamp-4">
                       <div
                         dangerouslySetInnerHTML={{
                           __html: article.content
@@ -136,21 +136,14 @@ const HistoryTable = () => {
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost">...</Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-fit p-4 flex flex-col space-y-2">
+                        <DropdownMenuContent className="w-fit p-4 flex flex-col space-y-2 z-10">
                           <Button
+                            onClick={() =>
+                              (window.location.href = `/dashboard/edit-article/${article.id}`)
+                            }
                             variant="default"
                             className="w-[5vw] bg-indigo-600 hover:bg-indigo-700 text-white">
                             Edit
-                          </Button>
-                          <Button
-                            variant="default"
-                            className="w-[5vw] bg-green-600
-                hover:bg-green-700 text-white"
-                            asChild>
-                            <Link
-                              href={`/dashboard/create-article/${article.id}`}>
-                              View
-                            </Link>
                           </Button>
                           <Button
                             variant="default"

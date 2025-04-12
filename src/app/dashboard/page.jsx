@@ -173,26 +173,19 @@ export default function Page() {
           </section>
         </div>
 
-        <div className="grid auto-rows-min gap-4 md:grid-cols-2">
+        <div className="grid auto-rows-min gap-4 md:grid-cols-1">
           <section className="h-[60vh] flex flex-col space-y-6 rounded-xl bg-muted/50 p-6">
             <div className="flex justify-between">
               <h2 className="text-2xl font-semibold">Articles</h2>
               <Link
                 href="/dashboard/create-article"
-                className="bg-indigo-600 h-fit text-white px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in"
-              >
+                className="bg-indigo-600 h-fit text-white px-4 py-2 rounded-md font-medium hover:bg-indigo-700 hover:text-white transition duration-150 ease-in">
                 New Article
               </Link>
             </div>
 
             <div>
               <HistorySearchInput />
-            </div>
-          </section>
-
-          <section className="h-[60vh] flex flex-col space-y-6 rounded-xl bg-muted/50 p-6">
-            <div className="flex justify-between">
-              <h2 className="text-2xl font-semibold">Trending Keywords</h2>
             </div>
           </section>
         </div>

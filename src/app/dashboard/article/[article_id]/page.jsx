@@ -29,8 +29,12 @@ const page = () => {
           console.log(res.error);
         }
 
-        setArticle(res.data[0].content);
-        setArticle((prev) => removeMarkdownFromArticle(prev));
+        const content = res.data[0].content;
+
+        const cleanedContent = removeMarkdownFromArticle(content);
+
+        setArticle(cleanedContent);
+
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -42,12 +46,9 @@ const page = () => {
 
     const removeMarkdownFromArticle = (article) => {
       return article
-        .replace(/```/g, "")
-        .replace("html", "")
-        .replace(/`([^`]*)`/g, "$1")
-        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // replace ** with bold
-        .replace(/\*\s*(.*?)\s*\*/g, "$1") // replace * with italics
-        .replace(/\*\s*(.*?)\s*\*/g, "$1"); // replace * with italics
+        .replace(/`([^`]*)`/g, "$1") // remove inline code backticks
+        .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // convert bold
+        .replace(/\*(.*?)\*/g, "$1"); // convert italics
     };
 
     fetchArticleById();
@@ -62,7 +63,18 @@ const page = () => {
       });
     };
 
+    const highlightCodeBlocks2 = () => {
+      const codeBlocks = document.querySelectorAll(
+        ".ql-code-block-container .ql-code-block"
+      );
+
+      codeBlocks.forEach((block) => {
+        hljs.highlightElement(block);
+      });
+    };
+
     highlightCodeBlocks();
+    highlightCodeBlocks2();
   }, [article]);
 
   return (
