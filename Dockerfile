@@ -13,7 +13,7 @@ ARG NODE_VERSION=22.12.0
 FROM node:${NODE_VERSION}-alpine as base
 
 # Set working directory for all build stages.
-WORKDIR /usr/src/app
+WORKDIR /src/app
 
 
 ################################################################################
