@@ -16,16 +16,17 @@ import { useSearchParams } from "next/navigation";
 import supabase from "@/lib/supabaseClient";
 
 const page = () => {
+  const searchParams = useSearchParams();
+
   const [user, setUser] = useState(null);
   const [countdown, setCountdown] = useState(60);
   const [isResending, setIsResending] = useState(false);
   const [resendSuccess, setResendSuccess] = useState(false);
 
-  const searchParams = useSearchParams();
-  const user_id = searchParams.get("id");
-
   useEffect(() => {
     const checkForUser = async () => {
+      const user_id = searchParams.get("id");
+
       const { data, error } = await supabase
         .from("login_with_email_users")
         .select("*")
